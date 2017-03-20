@@ -51,7 +51,7 @@ class Board(object):
         return self
 
 
-    def manhattan(self):
+    def manhattan(self): #provided by the original author
         """
         A naive heuristic. Returns the sum of the shortest distance between the
         player with an unplaced box and the distances between each box and their
@@ -65,6 +65,27 @@ class Board(object):
         player_dist = min([self.player.dist(box) for box in unplaced_boxes])
 
         box_distances = sum([min([box.dist(goal) for goal in unfilled_goals]) for box in unplaced_boxes])
+
+        return player_dist + box_distances
+
+    def euclidianHeruistic(self): #new made by Jake
+        def euclidean(x,y):
+            sumSq=0.0
+        
+            #add up the squared differences
+            for i in range(len(x)):
+                sumSq+=(x[i]-y[i])**2
+        
+            #take the square root of the result
+            return (sumSq**0.5)
+        unplaced_boxes = self.boxes.difference(self.goals)
+        unfilled_goals = self.goals.difference(self.boxes)
+        if not unplaced_boxes:
+            return 0
+        
+        player_dist = min([euclidean(self.player, box) for box in unplaced_boxes])
+
+        box_distances = sum([min([euclidean(self.player, box) for goal in unfilled_goals]) for box in unplaced_boxes])
 
         return player_dist + box_distances
 
@@ -130,9 +151,14 @@ class Board(object):
         self.walls.add(Position(x,y))
 
 
-    def deadlock(self):
-        """ TO BE IMPLEMENTED/USED """
-        pass
+    def deadlock(self): #implemented by Jake Harrington
+        for box in self.boxes:
+            contactWalls = 0
+            for direction in self.DIRECTION:
+                if (box + direction) in self.walls:
+                    contactWalls += 1
+            if contactWalls >=2:
+                return True
 
     
     def __hash__(self):

@@ -18,7 +18,7 @@ u_searches = [
 ]
 # informed searches
 i_searches = [
-    (gbfs, 'greedy best first search'),
+    (gbfs, 'greedy best first search'), #remove to only test a* with the informed argument
     (ass, 'A* search')
 ]
 
@@ -113,7 +113,6 @@ def puzzle(args):
 
 if __name__ == '__main__':
     args = get_args()
-
     if args.puzzle:
         puzzle(args)
 

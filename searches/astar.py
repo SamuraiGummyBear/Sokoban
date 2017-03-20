@@ -25,7 +25,7 @@ def a_star_search(board, print_steps=False):
         return records, board
 
     board_queue = AStarPriorityCostQueue()      # initialize queue
-    board_queue.push(0, board.manhattan(), board)
+    board_queue.push(0, board.manhattan(), board) #change board.manhattan to use different heuristic
     records['node'] += 1
 
     while True:

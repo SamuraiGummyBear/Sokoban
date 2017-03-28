@@ -23,9 +23,10 @@ i_searches = [
 ]
 
 test_maps = [
-    'easy_3',
-    'moderate_1',
-    'moderate_2',
+    #'easy_3',
+    #'moderate_1',
+    #'moderate_2',
+    'hard_1'
 ]
 
 def reportit(f):
